@@ -1,10 +1,10 @@
 //import * as d3 from 'd3';
 
-//function GraphResultsViewer(config,result) {
+function GraphResultsViewer(config,result) {
 
-const GraphResultsViewer= function(config,result) {
+///var GraphResultsViewer= function(config,result) {
 	this.svg;
-	this.visid = randomString(8);
+	this.visid = this.randomString(8);
 	this.currentDate = Date.now() / 1000; // nowish
 	// Individual links, nodes and text graphical elements
 	this.link_elements;
@@ -735,7 +735,7 @@ GraphResultsViewer.prototype.isFringe = function(node){
 	return node.type && node.type == "fringe";
 }
 
-function randomString(length) {
+GraphResultsViewer.prototype.randomString(length) {
     var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz'.split('');
     if (! length) {
         length = Math.floor(Math.random() * chars.length);
@@ -747,6 +747,4 @@ function randomString(length) {
     return str;
 }
 
-//module.exports = GraphResultsViewer
 
-//export default GraphResultsViewer;

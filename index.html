@@ -11,26 +11,21 @@
   </body>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.js" integrity="sha512-vRqhAr2wsn+/cSsyz80psBbCcqzz2GTuhGk3bq3dAyytz4J/8XwFqMjiAGFBj+WM95lHBJ9cDf87T3P8yMrY7A==" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/d3.min.js"></script>
- <!-- <script type="text/javascript" src="/terminusdb-client.min.js"></script>-->
-  <script type="text/javascript" src="/GraphResultsViewer.js"></script>
+ <!-- <script type="text/javascript" src="/d3.min.js"></script>
+ <script type="text/javascript" src="/terminusdb-client.min.js"></script>
+  <script type="text/javascript" src="/GraphResultsViewer.js"></script>-->
 
   <script>
 
   require.config({
     paths: {
-        d3: 'https://d3js.org/d3.v5.min',
-        TerminusClient:'terminusdb-client.min.js'
+        d3: 'd3.min',
+        TerminusClient:'terminusdb-client.min',
+        TerminusDBGraph:'terminusdb-react-graph.min'
     }
   });
 
-    require('d3','TerminusClient', function(d3,TerminusClient){
-
-
-        alert("hello");
-        const woqlGraphConfig= TerminusClient.View.graph();
-
-    })
+    require(['d3','TerminusClient','TerminusDBGraph'], function(d3,TerminusClient,TerminusDBGraph){
 
 
     const resultData={
@@ -96,15 +91,17 @@
   "transaction_retry_count":0
 }
     
-    const woqlGraphConfig= TerminusClient.View.graph();
+    const woqlGraphConfig= new TerminusClient.View.graph();
     woqlGraphConfig.height(500).width(800)
     
     var result = new TerminusClient.WOQLResult(resultData);
     let viewer = woqlGraphConfig.create(null);
 
     viewer.setResult(result);
-    const graphResult= new GraphResultsViewer(viewer.config, viewer);
+    const graphResult= new TerminusDBGraph.GraphResultsViewer(viewer.config, viewer);
     graphResult.load("#mycontainer",true);
+
+  })
 
   </script>
   
